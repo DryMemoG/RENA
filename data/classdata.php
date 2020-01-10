@@ -6,11 +6,11 @@ class data
 	private $pass="";
 	private $bd="rena";
 	public $objconexion;
-	public function conectar()
+	public function connect()
 	{
 		$this->objconexion = mysqli_connect($this->servidor,$this->usuario,$this->pass,$this->bd) or die("Error de Conexion");
 	}
-	public function desconectar()
+	public function disconnect()
 	{
 		mysqli_close($this->objconexion);
 	}
