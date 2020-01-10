@@ -1,9 +1,9 @@
 <?php
-require_once('...\RENA\data\classdata.php');
+require_once('..\RENA\data\classdata.php');
 class grado{
   public function insert($data=array())
   {
-    $db=new $data();
+    $db=new data();
     $db->connect();
     foreach($data as $field=>$value)
     {
@@ -17,11 +17,12 @@ class grado{
   }
   public function list() //retorna un data table
   {
-    $bd = new data();
+    $db=new data();
     $db->connect();
     $query = "SELECT * FROM grado";
-    $dt=mysqli_query($bd->$objconexion,$query);
-    $bd->disconnect();
+    $dt=mysqli_query($db->objconexion,$query);
+
+    $db->disconnect();
     return $dt;
   }
 
