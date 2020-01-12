@@ -9,7 +9,7 @@ class grado{
     {
       $$field=$value;
     }
-    $query = "INSERT INTO grado(nombregrado) VALUES (''$nombregrado')";
+    $query = "INSERT INTO grado(nombregrado) VALUES ('$nombregrado')";
     $consulta = mysqli_query($db->objconexion,$query);
     $db->disconnect();
     echo"<script type=\"text/javascript\"> alert(\"Grado Agregado\");

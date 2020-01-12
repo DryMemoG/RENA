@@ -124,6 +124,32 @@
 
     <div id="content-wrapper">
 
+      <div class="container">
+        <div class="card card-register mx-auto mt-5">
+          <div class="card-header">Agregar un Nuevo Grado</div>
+          <div class="card-body">
+            <form class="needs-validation" novalidate="" method="POST" action="addgrade.php">
+              <div class="form-group">
+                    <div class="form-label-group">
+                      <input type="text" name="nombregrado" value="" class="form-control" placeholder="Grado" required="required" autofocus="autofocus">
+                      <div class="invalid-feedback">
+                        Debe ingresar un nombre de Grado
+                      </div>
+                      <label for="firstName">Grado</label>
+                    </div>
+
+
+
+
+              <div class="form-group">
+
+              </div>
+              <button class="btn btn-primary btn-block" type="submit" onclick="">Guardar</button>
+            </form>
+
+          </div>
+        </div>
+      </div>
       <!-- /.container-fluid -->
 
 

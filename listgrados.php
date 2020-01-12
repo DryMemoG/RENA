@@ -116,18 +116,41 @@
           <span>Charts</span></a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="tables.html">
+        <a class="nav-link" href="listgrados.php">
           <i class="fas fa-fw fa-table"></i>
           <span>Grados</span></a>
       </li>
     </ul>
 
+
     <div id="content-wrapper">
 
       <div class="container-fluid">
+        <div class="col-xl-3 col-sm-6 mb-3">
+          <div class="card text-white bg-success o-hidden h-100">
+            <div class="card-body">
+              <div class="card-body-icon">
+                <i class="fas fa-fw fa-list"></i>
+              </div>
+              <div class="mr-5">Agregar Grado</div>
+            </div>
+            <a class="card-footer text-white clearfix small z-1" href="addgrado.php">
+              <span class="float-left">Ir al Sitio</span>
+              <span class="float-right">
+                <i class="fas fa-angle-right"></i>
+              </span>
+            </a>
+          </div>
+        </div>
+      
+
+
         <?php
         require_once('bussinesslogic\classgrado.php');
+        require_once('bussinesslogic\classalumnosgrado.php');
+        $algrado = new alumnosgrado();
         $grado = new grado();
+        $dt2=$algrado->list();
         $dt=$grado->list();
         ?>
 
@@ -161,8 +184,8 @@
                   {
                     echo'<tr>';
                     echo'<td>' .$row['nombregrado'].'</td>';
-                    echo'<td>' .'0'.'</td>';
-                    echo'<td>' .'0'.'</td>';
+                    echo'<td>' .$row['cantalumnos'].'</td>';
+                    echo'<td>' .$row['cantcursos'].'</td>';
                     echo'</tr>';
 
                   }
