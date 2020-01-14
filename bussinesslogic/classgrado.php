@@ -25,6 +25,16 @@ class grado{
     $db->disconnect();
     return $dt;
   }
+  public function list2($codgrado) //retorna un data table
+  {
+    $db=new data();
+    $db->connect();
+    $query = "SELECT * FROM grado WHERE codgrado = $codgrado";
+    $dt=mysqli_query($db->objconexion,$query);
+
+    $db->disconnect();
+    return $dt;
+  }
 
 }
 ?>

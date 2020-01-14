@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>RENA - Agregar Grado</title>
+  <title>RENA - Resumen</title>
 
   <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -121,37 +121,118 @@
           <span>Grados</span></a>
       </li>
     </ul>
+    <?php
+    $s = $_SERVER['REQUEST_URI'];
+    $n = explode("?",$s);
+    $codgrado=$n[1];
+    require_once('bussinesslogic\classgrado.php');
+    require_once('bussinesslogic\classcurso.php');
+    $curso = new curso();
+    $grado = new grado();
+    $dc=$curso->list2($codgrado);
+    $dt=$grado->list2($codgrado);
+    ?>
 
     <div id="content-wrapper">
+      <script type="text/javascript">
+        var s = <?php echo $codgrado;?>
+        document.location.target="_blank";
+        document.location.href="detallecurso.php?"+s;
 
-      <div class="container">
-        <div class="card card-register mx-auto mt-5">
-          <div class="card-header">Agregar un Nuevo Grado</div>
-          <div class="card-body">
-            <form class="needs-validation" novalidate="" method="POST" action="addgrade.php">
-              <div class="form-group">
-                    <div class="form-label-group">
-                      <input type="text" name="nombregrado" value="" class="form-control" placeholder="Grado" required="required" autofocus="autofocus">
-                      <div class="invalid-feedback">
-                        Debe ingresar un nombre de Grado
-                      </div>
-                      <label for="firstName">Grado</label>
-                    </div>
-
-
-
-
-              <div class="form-group">
-
+      </script>
+      <div class="container-fluid">
+        <div class="col-xl-3 col-sm-6 mb-3">
+          <div class="card text-white bg-danger o-hidden h-100">
+            <div class="card-body">
+              <div class="card-body-icon">
+                <i class="fas fa-fw fa-list"></i>
               </div>
-              <button class="btn btn-primary btn-block" type="submit" onclick="">Guardar</button>
-            </form>
+              <div class="mr-5">Agregar Curso</div>
+            </div>
+            <a class="card-footer text-white clearfix small z-1" href="addcurso.php?<?php echo $codgrado;?>">
+              <span class="float-left">Ir al Sitio</span>
 
+              <span class="float-right">
+                <i class="fas fa-angle-right"></i>
+              </span>
+            </a>
           </div>
         </div>
+
+
+
+
+
+        <!-- DataTables Grados -->
+        <div class="card mb-3">
+          <div class="card-header">
+            <i class="fas fa-table"></i>
+            <?php
+              while($row = mysqli_fetch_array($dt))
+              {
+                echo $row['nombregrado'];
+              }
+            ?></div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                  <tr>
+                    <th>Cursos Impartidos</th>
+
+                    <th style="visibility: hidden">N</th>
+                  </tr>
+                </thead>
+                <tfoot>
+                  <tr>
+                    <th>Cursos Impartidos</th>
+
+                    <th style="visibility: hidden">N</th>
+                  </tr>
+                </tfoot>
+                <tbody>
+                <!-- Body -->
+                <?php
+                  while($row = mysqli_fetch_array($dc))
+                  {
+                    echo'<tr>';
+                    echo'<td>' .$row['nombrecurso'].'</td>';
+                    echo '<td style="visibility: hidden">' .$row['codcurso']. '</td>';
+
+                    echo'</tr>';
+
+                  }
+
+                ?>
+                <!-- Script para seleccionar un elemento de la DT y enviar el id-->
+                <script type="text/javascript">
+                  var table = document.getElementById("dataTable");
+                  var band =0;
+                  for(var i =1; i < table.rows.length; i++)
+                  {
+                    table.rows[i].onclick= function()
+                  {
+                    var s = document.getElementsByName("codcurso").value = this.cells[1].innerHTML;
+                    //document.getElementById("")
+
+                    document.location.target="_blank";
+                    document.location.href="detallecurso.php?"+s;
+                    }
+                    }
+                  </script>
+
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+
+
+
       </div>
       <!-- /.container-fluid -->
-
 
       <!-- Sticky Footer -->
       <footer class="sticky-footer">

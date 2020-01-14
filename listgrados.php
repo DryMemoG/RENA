@@ -142,15 +142,14 @@
             </a>
           </div>
         </div>
-      
+
 
 
         <?php
         require_once('bussinesslogic\classgrado.php');
-        require_once('bussinesslogic\classalumnosgrado.php');
-        $algrado = new alumnosgrado();
+
         $grado = new grado();
-        $dt2=$algrado->list();
+        
         $dt=$grado->list();
         ?>
 
@@ -161,13 +160,13 @@
             Resumen Didáctico</div>
           <div class="card-body">
             <div class="table-responsive">
-              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                   <tr>
                     <th>Grados Asignados</th>
                     <th>Número de Alumnos</th>
                     <th>Cursos Impartidos</th>
-
+                    <th style="visibility: hidden">N</th>
                   </tr>
                 </thead>
                 <tfoot>
@@ -175,6 +174,7 @@
                     <th>Grados Asignados</th>
                     <th>Número de Alumnos</th>
                     <th>Cursos Impartidos</th>
+                    <th style="visibility: hidden">N</th>
                   </tr>
                 </tfoot>
                 <tbody>
@@ -186,11 +186,30 @@
                     echo'<td>' .$row['nombregrado'].'</td>';
                     echo'<td>' .$row['cantalumnos'].'</td>';
                     echo'<td>' .$row['cantcursos'].'</td>';
+                    echo '<td style="visibility: hidden">' .$row['codgrado']. '</td>';
+
                     echo'</tr>';
 
                   }
 
                 ?>
+                <!-- Script para seleccionar un elemento de la DT y enviar el id-->
+                <script type="text/javascript">
+                  var table = document.getElementById("dataTable");
+                  var band =0;
+                  for(var i =1; i < table.rows.length; i++)
+                  {
+                    table.rows[i].onclick= function()
+                  {
+                    var s = document.getElementsByName("codgrado").value = this.cells[3].innerHTML;
+                    //document.getElementById("")
+
+                    document.location.target="_blank";
+                    document.location.href="detallegrado.php?"+s;
+                    }
+                    }
+                  </script>
+
 
                 </tbody>
               </table>

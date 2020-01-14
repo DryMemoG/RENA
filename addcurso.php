@@ -122,28 +122,31 @@
       </li>
     </ul>
 
+<?php
+$s = $_SERVER['REQUEST_URI'];
+$n = explode("?",$s);
+$codgrado=$n[1];
+?>
     <div id="content-wrapper">
 
       <div class="container">
         <div class="card card-register mx-auto mt-5">
-          <div class="card-header">Agregar un Nuevo Grado</div>
+          <div class="card-header">Agregar un Nuevo Curso</div>
           <div class="card-body">
-            <form class="needs-validation" novalidate="" method="POST" action="addgrade.php">
+            <form class="needs-validation" novalidate="" method="POST" action="addcourse.php">
               <div class="form-group">
                     <div class="form-label-group">
-                      <input type="text" name="nombregrado" value="" class="form-control" placeholder="Grado" required="required" autofocus="autofocus">
+                      <input type="text" name="nombrecurso" value="" class="form-control" placeholder="Curso" required="required" autofocus="autofocus">
                       <div class="invalid-feedback">
-                        Debe ingresar un nombre de Grado
+                        Debe ingresar un nombre de curso
                       </div>
-                      <label for="firstName">Grado</label>
+                      <input type="number" name="codgrado" value="<?php echo $codgrado;?>" class="form-control" visibility: "hidden">
+                      <label for="firstName">Curso</label>
                     </div>
 
+                  </div>
 
 
-
-              <div class="form-group">
-
-              </div>
               <button class="btn btn-primary btn-block" type="submit" onclick="">Guardar</button>
             </form>
 
