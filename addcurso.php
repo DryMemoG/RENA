@@ -140,8 +140,9 @@ $codgrado=$n[1];
                       <div class="invalid-feedback">
                         Debe ingresar un nombre de curso
                       </div>
-                      <input type="number" name="codgrado" value="<?php echo $codgrado;?>" class="form-control" visibility: "hidden">
+                      <input type="hidden" name="codgrado" value="<?php echo $codgrado;?>" class="form-control" visibility: "hidden">
                       <label for="firstName">Curso</label>
+
                     </div>
 
                   </div>

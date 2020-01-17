@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>RENA - Resumen</title>
+  <title>RENA - Agregar Estudiante</title>
 
   <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -42,6 +42,7 @@
           </button>
         </div>
       </div>
+
     </form>
 
     <!-- Navbar -->
@@ -121,140 +122,44 @@
           <span>Grados</span></a>
       </li>
     </ul>
-    <?php
-    $s = $_SERVER['REQUEST_URI'];
-    $n = explode("?",$s);
-    $codgrado=$n[1];
-    require_once('bussinesslogic\classgrado.php');
-    require_once('bussinesslogic\classcurso.php');
-    $curso = new curso();
-    $grado = new grado();
-    $dc=$curso->list2($codgrado);
-    $dt=$grado->list2($codgrado);
-    ?>
 
+<?php
+$s = $_SERVER['REQUEST_URI'];
+$n = explode("?",$s);
+$codgrado=$n[1];
+?>
     <div id="content-wrapper">
-      <script type="text/javascript">
-        var s = <?php echo $codgrado;?>
-        document.location.target="_blank";
-        document.location.href="detallecurso.php?"+s;
 
-      </script>
-      <div class="container-fluid">
-        <div class="row">
-        <div class="col-xl-3 col-sm-6 mb-3">
-          <div class="card text-white bg-danger o-hidden h-100">
-            <div class="card-body">
-              <div class="card-body-icon">
-                <i class="fas fa-fw fa-list"></i>
-              </div>
-              <div class="mr-5">Agregar Curso</div>
-            </div>
-            <a class="card-footer text-white clearfix small z-1" href="addcurso.php?<?php echo $codgrado;?>">
-              <span class="float-left">Ir al Sitio</span>
-
-              <span class="float-right">
-                <i class="fas fa-angle-right"></i>
-              </span>
-            </a>
-          </div>
-
-        </div>
-        <div class="col-xl-3 col-sm-6 mb-3">
-          <div class="card text-white bg-primary o-hidden h-100">
-            <div class="card-body">
-              <div class="card-body-icon">
-                <i class="fas fa-fw fa-comments"></i>
-              </div>
-              <div class="mr-5">Agregar Alumnos</div>
-            </div>
-            <a class="card-footer text-white clearfix small z-1" href="addalumno.php?<?php echo $codgrado;?>">
-              <span class="float-left">Ir al Sitio</span>
-
-              <span class="float-right">
-                <i class="fas fa-angle-right"></i>
-              </span>
-            </a>
-          </div>
-
-        </div>
-      </div>
-
-
-
-
-
-
-        <!-- DataTables Grados -->
-        <div class="card mb-3">
-          <div class="card-header">
-            <i class="fas fa-table"></i>
-            <?php
-              while($row = mysqli_fetch_array($dt))
-              {
-                echo $row['nombregrado'];
-              }
-            ?></div>
+      <div class="container">
+        <div class="card card-register mx-auto mt-5">
+          <div class="card-header">Agregar un Nuevo Estudiante</div>
           <div class="card-body">
-            <div class="table-responsive">
-              <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
-                <thead>
-                  <tr>
-                    <th>Cursos Impartidos</th>
-
-                    <th style="visibility: hidden">N</th>
-                  </tr>
-                </thead>
-                <tfoot>
-                  <tr>
-                    <th>Cursos Impartidos</th>
-
-                    <th style="visibility: hidden">N</th>
-                  </tr>
-                </tfoot>
-                <tbody>
-                <!-- Body -->
-                <?php
-                  while($row = mysqli_fetch_array($dc))
-                  {
-                    echo'<tr>';
-                    echo'<td>' .$row['nombrecurso'].'</td>';
-                    echo '<td style="visibility: hidden">' .$row['codcurso']. '</td>';
-
-                    echo'</tr>';
-
-                  }
-
-                ?>
-                <!-- Script para seleccionar un elemento de la DT y enviar el id-->
-                <script type="text/javascript">
-                  var table = document.getElementById("dataTable");
-                  var band =0;
-                  for(var i =1; i < table.rows.length; i++)
-                  {
-                    table.rows[i].onclick= function()
-                  {
-                    var s = document.getElementsByName("codcurso").value = this.cells[1].innerHTML;
-                    //document.getElementById("")
-
-                    document.location.target="_blank";
-                    document.location.href="detallecurso.php?"+s;
-                    }
-                    }
-                  </script>
-
-
-                </tbody>
-              </table>
+            <form class="needs-validation" novalidate="" method="POST" action="addstudent.php">
+            <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">
+                <div class="form-label-group">
+                  <input type="text" id="firstName" name="nombresalumno" class="form-control" placeholder="First name" required="required" autofocus="autofocus">
+                  <label for="firstName">Nombres</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-label-group">
+                  <input type="text" id="lastName" name="apellidosalumno" class="form-control" placeholder="Last name" required="required">
+                  <label for="lastName">Apellidos</label>
+                  <input type="hidden" name="codgrado" value="<?php echo $codgrado;?>" class="form-control" visibility: "hidden">
+                </div>
+              </div>
             </div>
           </div>
+          <button class="btn btn-primary btn-block" type="submit" onclick="">Guardar</button>
+        </form>
 
+          </div>
         </div>
-
-
-
       </div>
       <!-- /.container-fluid -->
+
 
       <!-- Sticky Footer -->
       <footer class="sticky-footer">
